@@ -92,6 +92,11 @@ func tcpLocal(addr, server string, shadow func(net.Conn) net.Conn, getAddr func(
 	}
 }
 
+func httpLocal(addr, server string, shadow func(net.Conn) net.Conn) {
+	logf("http proxy %s <-> %s", addr, server)
+	tcpLocal(addr, server, shadow, func(c net.Conn) (socks.Addr, error) { return httpproxy.Handshake(c) })
+}
+
 // Listen on addr for incoming connections.
 func tcpRemote(addr string, shadow func(net.Conn) net.Conn) {
 	l, err := net.Listen("tcp", addr)
