@@ -34,6 +34,7 @@ func main() {
 		Password   string
 		Keygen     int
 		Socks      string
+		HttpProxy      string
 		RedirTCP   string
 		RedirTCP6  string
 		TCPTun     string
@@ -146,9 +147,6 @@ func main() {
 		}
 	}
 	
-	if flags.HttpProxy != "" {
-		go httpLocal(flags.HttpProxy, addr, ciph.StreamConn)
-	}
 
 	if flags.Server != "" { // server mode
 		addr := flags.Server
@@ -183,6 +181,9 @@ func main() {
 		if flags.TCP {
 			go tcpRemote(addr, ciph.StreamConn)
 		}
+	    if flags.HttpProxy != "" {
+	    	go httpLocal(flags.HttpProxy, addr, ciph.StreamConn)
+	    }
 	}
 
 	sigCh := make(chan os.Signal, 1)
