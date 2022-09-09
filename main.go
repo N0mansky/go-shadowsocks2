@@ -138,6 +138,10 @@ func main() {
 			}
 		}
 
+	    if flags.HttpProxy != "" {
+	    	go httpLocal(flags.HttpProxy, addr, ciph.StreamConn)
+	    }
+
 		if flags.RedirTCP != "" {
 			go redirLocal(flags.RedirTCP, addr, ciph.StreamConn)
 		}
@@ -181,9 +185,6 @@ func main() {
 		if flags.TCP {
 			go tcpRemote(addr, ciph.StreamConn)
 		}
-	    if flags.HttpProxy != "" {
-	    	go httpLocal(flags.HttpProxy, addr, ciph.StreamConn)
-	    }
 	}
 
 	sigCh := make(chan os.Signal, 1)
