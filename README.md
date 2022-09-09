@@ -48,7 +48,7 @@ respectively.
 
 ```sh
 go-shadowsocks2 -c 'ss://AEAD_CHACHA20_POLY1305:your-password@[server_address]:8488' \
-    -verbose -socks :1080 -u -udptun :8053=8.8.8.8:53,:8054=8.8.4.4:53 \
+    -verbose -socks :1080 -http-proxy :1081 -u -udptun :8053=8.8.8.8:53,:8054=8.8.4.4:53 \
                              -tcptun :8053=8.8.8.8:53,:8054=8.8.4.4:53
 ```
 
